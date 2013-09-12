@@ -10,7 +10,7 @@ namespace ConsoleHandler
     {
         public static void Initialize()
         {
-            Console.CursorVisible=false;
+            Console.CursorVisible=false ;
         }
     }
 }
