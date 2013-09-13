@@ -12,9 +12,9 @@ namespace ASCIIGame
         {
             Console.CursorVisible=false ;
         }
-        public static void Draw(int x, int y, MapObject.Icon icon)
+        public static void Draw(MapObject.Position pos, MapObject.Icon icon)
         {
-            Console.SetCursorPosition(x, y);
+            Console.SetCursorPosition(pos.x, pos.y);
             Console.WriteLine(icon.character);
         }
     }

@@ -14,6 +14,7 @@ namespace ASCIIGame
             MapHandler.Map amap = new MapHandler.Map();
             amap.name = "Test Map";
             MapHandler.Initialize(amap);
+            MapHandler.Update();
             Console.ReadKey(true);
         }
     }

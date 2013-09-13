@@ -35,8 +35,6 @@ namespace ASCIIGame
       public Icon icon;
       public void Move(MapObject obj,Position newpos)
       {
-          MapHandler.ActiveMap[obj.position.x, obj.position.y].Remove(obj);
-          MapHandler.ActiveMap[newpos.x, newpos.y].Add(obj);
           obj.position = newpos;
       }
       public void Left(MapObject obj)

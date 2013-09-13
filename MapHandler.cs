@@ -10,8 +10,8 @@ namespace ASCIIGame
 /*
  *  MapHandler keeps track of where shit is at.
  * 
- * Initialize(Map) takes a  Map and populates the ActiveMap array
- * 
+ * Initialize(Map) populates the ActiveMap list based on the properties defined for that map.
+ *     
  * 
  */
     class MapHandler
@@ -22,15 +22,17 @@ namespace ASCIIGame
            public int sizex=10;
            public int sizey = 10;
         }
-        public static List<MapObject>[,] ActiveMap; // The Active Map is the map is the array that is viewed by the ConsoleHandler
+        public static List<MapObject> ActiveMap; // The Active Map is the map is the array that is viewed by the ConsoleHandler
         
 /*
- *     Initialize(themap) takes an instance of the Map class, and loads it into an array.
- *     The array is sized to Map.themap.sizex and Map.themap.sizey
+ *     Initialize(themap) creates an instance of the map class, and initializes ActiveMap with a list of MapObjects.
+ *         Initialize looks at each possible x,y position up to sizex,sizey, and creates MapObjects with 
+ *         that Position 
+  
  */
         public static void Initialize(Map themap)
         {
-            ActiveMap = new List<MapObject>[themap.sizex, themap.sizey];  // initialize the array, at size specified by themap
+            ActiveMap = new List<MapObject>(); // Initializes a list of MapObjects
             Console.Title = themap.name;                        
             for (int posx = 0; posx < themap.sizex; posx++) // Iterates through each position (posx,posy) in the map
             {
@@ -38,11 +40,21 @@ namespace ASCIIGame
                 {
                     // Instructions for each (posx,posy) go HERE:
                     List<MapObject> here=GetMapObjects(posx,posy,themap);
-                    ActiveMap[posx, posy] = here;
-                    ConsoleHandler.Draw(posx,posy,here[0].icon);
+                    foreach (MapObject obj in here)
+                    {                  
+                        obj.position = new MapObject.Position(posx,posy);
+                        ActiveMap.Add(obj);
+                    }
                 }           
             }   
-        } 
+        }
+        public static void Update()
+        {
+            foreach (MapObject obj in ActiveMap)
+            {
+              ConsoleHandler.Draw(obj.position, obj.icon);
+            }
+        }
         public static List<MapObject> GetMapObjects(int x,int y, Map themap)
         {
                 List<MapObject> here = new List<MapObject>();
