@@ -3,24 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ConsoleHandler;
-using MapHandler;
 
-namespace Main
+namespace ASCIIGame
 {
     class Program
     {
         public static void Main(string[] args)
         {
-            ConsoleHandler.ConsoleHandler.Initialize();
-            MapHandler.MapHandler.Map amap = new MapHandler.MapHandler.Map();
+            ConsoleHandler.Initialize();
+            MapHandler.Map amap = new MapHandler.Map();
             amap.name = "Test Map";
-            MapHandler.MapHandler.Initialize(amap);
-           
-            
-            
-            
-           
+            MapHandler.Initialize(amap);
+            Console.ReadKey(true);
         }
     }
 }

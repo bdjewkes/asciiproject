@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
-    <Compile Include="MapObjects.cs" />
+    <Compile Include="MapObject.cs" />
     <Compile Include="ConsoleHandler.cs" />
     <Compile Include="MapHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
