@@ -26,9 +26,9 @@ namespace ASCIIGame
         
 /*
  *     Initialize(themap) creates an instance of the map class, and initializes ActiveMap with a list of MapObjects.
- *         Initialize looks at each possible x,y position up to sizex,sizey, and creates MapObjects with 
- *         that Position 
-  
+ *         Initialize looks at each possible x,y position up to sizex,sizey.  For each x,y position, Initialize
+ *         creates a a list of MapObjects 'here' with CreateMapObject, sets the position of each MapObject to
+ *         x,y, and adds the contents of 'here' to the ActiveMap.
  */
         public static void Initialize(Map themap)
         {
@@ -39,10 +39,11 @@ namespace ASCIIGame
                 for (int posy = 0; posy < themap.sizey; posy++)
                 {
                     // Instructions for each (posx,posy) go HERE:
-                    List<MapObject> here=GetMapObjects(posx,posy,themap);
+                    List<MapObject> here=CreateMapObject(posx,posy,themap);
                     foreach (MapObject obj in here)
                     {                  
-                        obj.position = new MapObject.Position(posx,posy);
+                        MapObject.Position pos = new MapObject.Position(posx,posy);
+                        MapObject.Move(obj, pos);
                         ActiveMap.Add(obj);
                     }
                 }           
@@ -52,14 +53,22 @@ namespace ASCIIGame
         {
             foreach (MapObject obj in ActiveMap)
             {
-              ConsoleHandler.Draw(obj.position, obj.icon);
+              ConsoleHandler.Draw(obj);
             }
         }
-        public static List<MapObject> GetMapObjects(int x,int y, Map themap)
+        public static List<MapObject> CreateMapObject(int x,int y, Map themap)
         {
                 List<MapObject> here = new List<MapObject>();
-                if (CheckEdge(x, y, themap)){ here.Add(new Wall()); }
-                else { here.Add(new Floor()); }
+                if (CheckEdge(x, y, themap))
+                {
+                    MapObject obj = MapObject.Wall();
+                    here.Add(obj); 
+                }
+                else 
+                {
+                    MapObject obj = MapObject.Floor();
+                    here.Add(obj); 
+                }
                 return here;
 
         }
