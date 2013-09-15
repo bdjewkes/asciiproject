@@ -17,7 +17,12 @@ namespace ASCIIGame
             MapObject.Position pos = MapObject.GetPosition(obj);
             MapObject.Display display = MapObject.GetDisplay(obj);
             Console.SetCursorPosition(pos.x, pos.y);
-            Console.WriteLine(display.character);
+            Console.Write(display.character);
+        }
+        public static void ClearObj(MapObject obj, MapObject.Position pos)
+        {
+            Console.SetCursorPosition(pos.x, pos.y);
+            Console.Write(' ');
         }
     }
 }
