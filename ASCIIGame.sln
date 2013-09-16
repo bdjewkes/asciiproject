@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASCIIGame", "ASCIIGame.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "..\UnitTestProject1\UnitTestProject1\UnitTestProject1.csproj", "{254A7A94-11A9-4E4A-85CD-79CE1F960F5E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASCIIGameTests", "AsciiUnitTests\ASCIIGameTests.csproj", "{A5ED4613-D6BB-4BFD-A703-79BE83CF8805}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,10 +17,17 @@ Global
 		{0F1BCCEB-B2C5-4EE9-9BB7-C15CF2B805BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F1BCCEB-B2C5-4EE9-9BB7-C15CF2B805BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F1BCCEB-B2C5-4EE9-9BB7-C15CF2B805BD}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
 		{254A7A94-11A9-4E4A-85CD-79CE1F960F5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{254A7A94-11A9-4E4A-85CD-79CE1F960F5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{254A7A94-11A9-4E4A-85CD-79CE1F960F5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{254A7A94-11A9-4E4A-85CD-79CE1F960F5E}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+		{A5ED4613-D6BB-4BFD-A703-79BE83CF8805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5ED4613-D6BB-4BFD-A703-79BE83CF8805}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5ED4613-D6BB-4BFD-A703-79BE83CF8805}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5ED4613-D6BB-4BFD-A703-79BE83CF8805}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> 6d5b1b927628729497e96bd975eedc347eedd9de
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

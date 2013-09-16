@@ -14,7 +14,7 @@ namespace ASCIIGame
  *     
  * 
  */
-    class MapHandler
+    public class MapHandler
     {
         public class Map
         {
