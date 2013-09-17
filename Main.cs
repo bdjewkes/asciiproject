@@ -11,9 +11,9 @@ namespace ASCIIGame
         public static void Main(string[] args)
         {
             ConsoleHandler.Initialize();
-            MapHandler.Map amap = new MapHandler.Map();
-            amap.name = "Test Map";
-            MapHandler.Initialize(amap);
+            MapHandler.Map ActiveMap = new MapHandler.Map();
+            ActiveMap.name = "Test Map";
+            MapHandler.Initialize(ActiveMap);
             MapHandler.Refresh();
             bool quit = false;
             while (!quit)

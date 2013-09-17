@@ -14,7 +14,7 @@ namespace ASCIIGame
         }
         public static void Draw(MapObject obj)
         {
-            MapObject.Position pos = MapObject.GetPosition(obj);
+            MapObject.Position pos = obj.position;
             MapObject.Display display = MapObject.GetDisplay(obj);
             Console.SetCursorPosition(pos.x, pos.y);
             Console.Write(display.character);

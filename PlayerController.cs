@@ -10,29 +10,29 @@ namespace ASCIIGame
     {
         public static MapObject theplayer;
         public static MapObject.Position startpos = new MapObject.Position(4,4);
-        public static MapObject.Position MovePlayer(MapObject obj, string direction)
+        public static MapObject.Position MovePlayer(MapObject theplayer, string direction)
         {
-            MapObject.Position origin = MapObject.GetPosition(obj);
+            MapObject.Position origin = theplayer.position;
             MapObject.Position newpos;
             switch (direction)
             {
                 case "Up":
-                    newpos = MapObject.Up(obj);
+                    newpos = theplayer.Up();
                     break;
                 case "Down":
-                    newpos = MapObject.Down(obj);
+                    newpos = theplayer.Down();
                     break;
                 case "Left":
-                    newpos = MapObject.Left(obj);
+                    newpos = theplayer.Left();
                     break;
                 case "Right":
-                    newpos = MapObject.Right(obj);
+                    newpos = theplayer.Right();
                     break;
                 default:
                     newpos = origin;
                     break;
             }
-            MapObject.Move(obj, newpos);
+            theplayer.Move(newpos);
             return newpos;
         }
     }

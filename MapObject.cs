@@ -25,12 +25,8 @@ namespace ASCIIGame
                 this.y = locy;
             }
        }
-       protected Position position;
-       public static Position GetPosition(MapObject obj)
-       {
-          return obj.position;
-       }
-
+       public Position position { get; private set; }
+       
 /*
  * The GameObject's display information.  Currently only includes 'character', the ASCII character that will display on 
  * the console.  Add color or any other display information to this struc
@@ -84,46 +80,46 @@ namespace ASCIIGame
  *  Left(MO), Right(MO), Up(MO), and Down(MO) returns the position one step in the respective direction of the MO 
  */
  
-      public static Position Move(MapObject obj, Position newpos)
+      public Position Move(Position newpos)
       {
           if (CheckEntry(newpos)) 
           {
-              Position oldpos = obj.position;
-              MapHandler.QueueUpdate(obj, oldpos); // Do this BEFORE the position is updated to the newpos
-              obj.position = newpos;
-              return obj.position;
+              Position oldpos = this.position;
+              MapHandler.QueueUpdate(this, oldpos); // Do this BEFORE the position is updated to the newpos
+              this.position = newpos;
+              return this.position;
           }
-          else { return obj.position; }
+          else { return this.position; }
       }  
       public static void Place(MapObject obj,Position pos)
       {
           obj.position = pos;
       }
-      public static bool CheckEntry(Position toenter)  // Returns true if it is okay to enter, and false if not
+      public bool CheckEntry(Position newpos)  // Returns true if it is okay to enter, and false if not
       {
-          if (toenter.x < 0 ||  toenter.y < 0 || 
-              toenter.x > MapHandler.actmap.sizex || toenter.y > MapHandler.actmap.sizey) { return false; }
+          if (newpos.x < 0 ||  newpos.y < 0 || 
+              newpos.x > MapHandler.ActiveMap.sizex || newpos.y > MapHandler.ActiveMap.sizey) { return false; }
           else { return true; }
       }
 
-      public static Position Left(MapObject obj)
+      public Position Left()
       {
-          Position newpos = new Position(obj.position.x-1, obj.position.y);
+          Position newpos = new Position(position.x-1, position.y);
           return newpos;
       }
-      public static Position Right(MapObject obj)
+      public Position Right()
       {
-          Position newpos = new Position(obj.position.x+1, obj.position.y);
+          Position newpos = new Position(position.x+1, position.y);
           return newpos;
       }
-      public static Position Up(MapObject obj)
+      public Position Up()
       {
-          Position newpos = new Position(obj.position.x,obj.position.y-1);
+          Position newpos = new Position(position.x,position.y-1);
           return newpos;
       }
-      public static Position Down(MapObject obj)
+      public Position Down()
       {
-          Position newpos = new Position(obj.position.x, obj.position.y+1);
+          Position newpos = new Position(position.x, position.y+1);
           return newpos;
       }
     } 

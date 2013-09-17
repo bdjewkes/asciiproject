@@ -18,25 +18,14 @@ namespace ASCIIGame
     {
         public class Map
         {
-           public string name="Default Map";
-           public int sizex=10;
-           public int sizey = 10;
+           public string name;
+           public int sizex;
+           public int sizey;
+           public List<MapObject> MapObjectList;
         }
-
-        public struct ActiveMap
-        {
-            public List<MapObject> MapObjectList;
-            public int sizex;
-            public int sizey;
-            public ActiveMap(List<MapObject> MList,int sizeX,int sizeY)
-            {
-                MapObjectList = MList;
-                sizex = sizeX;
-                sizey = sizeY;
-            }
-        }
-        public static ActiveMap actmap;
-      
+       
+        public static Map ActiveMap;
+        
 /*
  *     Initialize(themap) takes an instance of the map class, and initializes the ActiveMap actmap with a list of
  *         MapObjects.  Initialize looks at each possible x,y position up to sizex,sizey.  For each x,y position, 
@@ -45,9 +34,8 @@ namespace ASCIIGame
  */
         public static void Initialize(Map themap)
         {
+            Console.Title = themap.name;
             List<MapObject> MOList = new List<MapObject>();
-            actmap = new ActiveMap(MOList,themap.sizex,themap.sizey); // Initializes a list of MapObjects
-            Console.Title = themap.name;                        
             for (int posx = 0; posx <= themap.sizex; posx++) // Iterates through each position (posx,posy) in the map
             {
                 for (int posy = 0; posy <= themap.sizey; posy++)
@@ -58,10 +46,11 @@ namespace ASCIIGame
                     {                  
                         MapObject.Position pos = new MapObject.Position(posx,posy);
                         MapObject.Place(obj,pos);
-                        actmap.MapObjectList.Add(obj);
+                        MOList.Add(obj);
                     }
                 }           
-            }   
+            }
+            themap.MapObjectList = MOList;
         }
 
 /*  
@@ -72,7 +61,7 @@ namespace ASCIIGame
         public static void Refresh()
         {
             Console.Clear();
-            foreach (MapObject obj in actmap.MapObjectList)
+            foreach (MapObject obj in ActiveMap.MapObjectList)
             {
                 ConsoleHandler.Draw(obj);
             }
@@ -131,11 +120,9 @@ namespace ASCIIGame
                 {
                     MapObject obj = MapObject.Player();
                     PlayerController.theplayer = obj;
-                    here.Add(obj);
-                   
+                    here.Add(obj);       
                 }
                 return here;
-
         }
         public static bool CheckEdge(int x, int y, Map themap)
         {
