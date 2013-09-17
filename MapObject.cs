@@ -95,10 +95,10 @@ namespace ASCIIGame
       {
           obj.position = pos;
       }
-      public bool CheckEntry(Position newpos)  // Returns true if it is okay to enter, and false if not
+      public static bool CheckEntry(Position newpos)  // Returns true if it is okay to enter, and false if not
       {
           if (newpos.x < 0 ||  newpos.y < 0 || 
-              newpos.x > MapHandler.ActiveMap.sizex || newpos.y > MapHandler.ActiveMap.sizey) { return false; }
+              newpos.x > MapHandler.Map.ActiveMap.sizex || newpos.y > MapHandler.Map.ActiveMap.sizey) { return false; }
           else { return true; }
       }
 

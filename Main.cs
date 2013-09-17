@@ -11,10 +11,12 @@ namespace ASCIIGame
         public static void Main(string[] args)
         {
             ConsoleHandler.Initialize();
-            MapHandler.Map ActiveMap = new MapHandler.Map();
-            ActiveMap.name = "Test Map";
-            MapHandler.Initialize(ActiveMap);
-            MapHandler.Refresh();
+            MapHandler.Map.ActiveMap = new MapHandler.Map();
+            MapHandler.Map.ActiveMap.name = "Test Map";
+            MapHandler.Map.ActiveMap.sizex = 10;
+            MapHandler.Map.ActiveMap.sizey = 10;
+            MapHandler.Map.ActiveMap.Initialize();
+            MapHandler.Map.ActiveMap.Refresh();
             bool quit = false;
             while (!quit)
             {
