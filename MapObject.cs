@@ -39,11 +39,8 @@ namespace ASCIIGame
                 this.character = newcharacter;
             }
           }
-        protected Display display;
-        public static Display GetDisplay(MapObject obj)
-        {
-            return obj.display;
-        }
+        public Display display { get; private set; }
+     
     
 /* 
  *  MOEntityFramework - tbd
@@ -85,7 +82,6 @@ namespace ASCIIGame
           if (CheckEntry(newpos)) 
           {
               Position oldpos = this.position;
-              MapHandler.QueueUpdate(this, oldpos); // Do this BEFORE the position is updated to the newpos
               this.position = newpos;
               return this.position;
           }

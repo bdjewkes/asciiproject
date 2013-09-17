@@ -51,20 +51,8 @@ namespace ASCIIGame
 /*  
  * Refresh does a complete redraw of the map.  This is a fast but visually distracting method, and should be 
  * avoided when possible
- */ 
-
-            
-           public void Refresh()
-           {
-                Console.Clear();
-                foreach (MapObject obj in this.MapObjectList)
-                {
-                     ConsoleHandler.Draw(obj);
-                }   
-            }
+ */
             public static Map ActiveMap;
-
-
             public List<MapObject> CreateMapObject(int x, int y)
             {
                 List<MapObject> here = new List<MapObject>();
@@ -94,39 +82,6 @@ namespace ASCIIGame
  *  2) draws the new display.  ########TO IMPLEMENT: check to see if there is another mapobject at that location,
  *  and draw that instead of simply clearing.  #### ALSO SOME KIND OF LAYER MANAGEMENT?
  */
-
-        public struct MapUpdate
-        {
-            public MapObject obj;
-            public MapObject.Position oldposition;
-            public MapUpdate(MapObject Obj, MapObject.Position OldPosition)
-            {
-                obj = Obj;
-                oldposition = OldPosition;
-            }
-        }
-
-        protected static List<MapUpdate> updatelist = new List<MapUpdate>();
-        public static void QueueUpdate(MapObject obj, MapObject.Position pos)
-        {
-            MapUpdate theupdate = new MapUpdate(obj,pos);
-            updatelist.Add(theupdate);
-        }
-        public static void Update()
-        {
-            if (updatelist.Count() == 0) { return; } 
-            else 
-            {
-                foreach (MapUpdate theupdate in updatelist)
-                {
-                ConsoleHandler.ClearObj(theupdate.obj,theupdate.oldposition);
-                ConsoleHandler.Draw(theupdate.obj);
-                }
-                updatelist.Clear();
-            }
-        }
-        
-
 
         
         public static bool CheckEdge(int x, int y, Map themap)

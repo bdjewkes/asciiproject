@@ -19,7 +19,7 @@ namespace ASCIIGameTests
             {
                 Assert.IsNotNull(obj.position);
             }
-            MapHandler.Map.ActiveMap.Refresh();
+            ConsoleHandler.Refresh(MapHandler.Map.ActiveMap);
          
            
             
