@@ -8,9 +8,11 @@ namespace ASCIIGame
 {
     class ConsoleHandler
     {
-        public static void Initialize()
+        public string name;
+        public void Initialize()
         {
             Console.CursorVisible=false ;
+            Console.Title = name;
         }
         public static void Draw(MapObject obj)
         {
@@ -39,12 +41,14 @@ namespace ASCIIGame
             char[,] buffer = new char[themap.sizex+1,themap.sizey+1];
             foreach (MapObject obj in themap.MapObjectList)
             {
-                buffer[obj.position.x,obj.position.y] = obj.display.character;
+                if (buffer[obj.position.x, obj.position.y] != 0 && obj.display.layer == 1)
+                { buffer[obj.position.x, obj.position.y] = Convert.ToChar(obj.display.layer);}
+                else if (buffer[obj.position.x, obj.position.y] == 0)
+                { buffer[obj.position.x, obj.position.y] = obj.display.character; }
             }
 
             for (int posx = 0; posx <= themap.sizex; posx++) // Iterates through each position (posx,posy) in the map
-            {
-                for (int posy = 0; posy <= themap.sizey; posy++)
+            { for (int posy = 0; posy <= themap.sizey; posy++)
                 {
                     if (ConsoleHandler.last_frame == null)
                     {
