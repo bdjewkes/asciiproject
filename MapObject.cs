@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace ASCIIGame
 {
     public class MapObject 
@@ -26,6 +27,7 @@ namespace ASCIIGame
             }
        }
        public Position position { get; private set; }
+       public string type;
        
 /*
  * The GameObject's display information.  Currently includes 'character', the ASCII character that will display on 
@@ -46,7 +48,20 @@ namespace ASCIIGame
           }
         public Display display { get; private set; }
      
-    
+   
+        public static void Update(List<MapObject> activeobjects)
+        {
+            foreach(MapObject obj in activeobjects)
+            {
+                if (obj.type == "wall")
+                {
+                    obj.display = obj.Wall_Behaviour();
+                }
+            }
+        }
+
+
+
 /* 
  *  MOEntityFramework - tbd
  */
@@ -57,7 +72,8 @@ namespace ASCIIGame
         public static MapObject Wall()
         {
             MapObject m = new MapObject();
-            m.display = new Display('#',0);
+            m.type = "wall";
+            m.display = new Display('#', 0);
             m.density = true;
             return m;
         }
@@ -79,14 +95,15 @@ namespace ASCIIGame
 /*
  *  MapObject Position methods:  
  *  
- *   Move(MapObject,Position) sets the position of a MapObject to the position entered as the second argument, and returns
+ *   mobj.Move(Position) sets the position of a MapObject to the position entered as the second argument, and returns
  *      the new position.  Move queues an update so that the change in position will show on the map without a full
  *      refresh. 
  *      
- *  Place(MapObject,Position) sets the position of a MapObject, but DOES NOT queue an update.  ONLY use Place
- *      if it is followed by a refresh, such as during initialization.
+ *  Place(MapObject,Position) sets the position of a MapObject, but does not require a positive CheckEntry.  Consider 
+ *      getting rid of it.
  *      
- *  Left(MO), Right(MO), Up(MO), and Down(MO) returns the position one step in the respective direction of the MO 
+ *  mobj.Left(), mobj.Right(), mobj.Up(), and mobj.Down() returns the position one step in the respective direction 
+ *  of the mobj 
  */
  
         public Position Move(Position newpos)
@@ -98,7 +115,7 @@ namespace ASCIIGame
             }
             else { return this.position; }
         }  
-        public static void Place(MapObject obj,Position pos)
+        public static void Place(MapObject obj,Position pos)  //######## slated for removal, make sure that won't break everything
         {
             obj.position = pos;
         }
@@ -140,5 +157,84 @@ namespace ASCIIGame
           Position newpos = new Position(position.x, position.y+1);
           return newpos;
       }
+
+    public Display Wall_Behaviour()
+    {
+        Display disp;
+        bool left = MapHandler.Map.ActiveMap.CheckForObject(this.Left(), this);
+        bool right = MapHandler.Map.ActiveMap.CheckForObject(this.Right(), this);
+        bool up = MapHandler.Map.ActiveMap.CheckForObject(this.Up(), this);
+        bool down = MapHandler.Map.ActiveMap.CheckForObject(this.Down(), this);
+       
+        //cross
+        if (down && right && left && up)
+        {
+            disp = new Display((char)206, 1);
+            return disp;
+        }
+        //T
+        if (down && right && left)
+        {
+            disp = new Display((char)203, 1);
+            return disp;
+        }
+        //upside down T
+        if (up && right && left)
+        {
+            disp = new Display((char)206, 1);
+            return disp;
+        }
+        // --|
+        if (up && down && left)
+        {
+            disp = new Display((char)185, 1);
+            return disp;
+        }
+        // |--
+        if (up && down && left)
+        {
+            disp = new Display((char)204, 1);
+            return disp;
+        }
+        if (down && right)
+        {
+            disp = new Display((char)201, 1);
+            return disp;
+        }
+        if (down && left)
+        {
+            disp = new Display((char)187, 1);
+            return disp;
+        }
+        if (up && right)
+        {
+            disp = new Display((char)200, 1);
+            return disp;
+        }
+        if (up && left)
+        {
+            disp = new Display((char)188, 1);
+            return disp;
+        }
+        if (down || up)
+        {
+            disp = new Display((char) 186,1);
+            return disp;
+        }
+        if (left || right)
+        {
+            disp = new Display((char) 205, 1);
+            return disp;
+        }
+        else
+        {
+            disp = new Display('#', 0);
+        }
+        return disp;
+    }
+
+   
+
+
     } 
 }

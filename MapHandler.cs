@@ -76,6 +76,17 @@ namespace ASCIIGame
                 return here;
             }
 
+/*
+ *  Map Search functions:
+ *  
+ *  Map.GetPosition(position) returns a List<MapObjects> containing the contents of position
+ *  Map.CheckForObject(position,object) looks at a position and checks for a MapObject.  Returns true if it is there,
+ *      and false if it is not.
+ * MapHandler.CheckEdge(x,y,map) checks to see if a location is on the edge of the map
+ *  
+ * 
+ */
+
             public List<MapObject> GetPositionContents(MapObject.Position pos)
             {
                 List<MapObject> here = new List<MapObject>();
@@ -85,6 +96,15 @@ namespace ASCIIGame
                     else { continue; }
                 }
                 return here;
+            }
+            public bool CheckForObject(MapObject.Position pos, MapObject obj)
+            {
+                var here = GetPositionContents(pos);
+                foreach (MapObject o in here)
+                {
+                    if (o.type == obj.type) { return true; }
+                }
+                return false;
             }
 
         }

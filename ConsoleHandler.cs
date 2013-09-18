@@ -13,6 +13,8 @@ namespace ASCIIGame
         {
             Console.CursorVisible=false ;
             Console.Title = name;
+            Console.OutputEncoding = System.Text.Encoding.GetEncoding(1252);
+
         }
         public static void Draw(MapObject obj)
         {
@@ -42,7 +44,7 @@ namespace ASCIIGame
             foreach (MapObject obj in themap.MapObjectList)
             {
                 if (buffer[obj.position.x, obj.position.y] != 0 && obj.display.layer == 1)
-                { buffer[obj.position.x, obj.position.y] = Convert.ToChar(obj.display.layer);}
+                { buffer[obj.position.x, obj.position.y] = Convert.ToChar(obj.display.character);}
                 else if (buffer[obj.position.x, obj.position.y] == 0)
                 { buffer[obj.position.x, obj.position.y] = obj.display.character; }
             }

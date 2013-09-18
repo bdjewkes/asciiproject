@@ -19,10 +19,29 @@ namespace ASCIIGameTests
             {
                 Assert.IsNotNull(obj.position);
             }
-            ConsoleHandler.Refresh(MapHandler.Map.ActiveMap);
-         
-           
-            
+  
+        }
+        [TestMethod]
+        public void WallBehaviourTest()
+        {
+            MapHandler.Map.ActiveMap = new MapHandler.Map();
+            MapObject topleft = MapObject.Wall();
+            MapObject topright = MapObject.Wall();
+            MapObject botleft = MapObject.Wall();
+            MapObject botright = MapObject.Wall();
+            MapHandler.Map.ActiveMap.MapObjectList.Add(topleft);
+            MapHandler.Map.ActiveMap.MapObjectList.Add(topright);
+            MapHandler.Map.ActiveMap.MapObjectList.Add(botleft);
+            MapHandler.Map.ActiveMap.MapObjectList.Add(botright);
+            topleft.Move(new MapObject.Position(0,0));
+            Assert.AreEqual(topleft.position.x, 0);
+            Assert.AreEqual(topleft.position.y, 0);
+            topright.Move(new MapObject.Position(1,0));
+            MapObject.Position tlr = topleft.Right();
+            MapObject.Position tll = topright.Left();
+            Assert.AreEqual(tlr.x, topright.position.x);
+            Assert.AreEqual(tll.x, topleft.position.x);
+
         }
 
         

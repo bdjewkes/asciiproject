@@ -18,6 +18,7 @@ namespace ASCIIGame
             MapHandler.Map.ActiveMap.sizex = 10;
             MapHandler.Map.ActiveMap.sizey = 10;
             MapHandler.Map.ActiveMap.Initialize();
+            MapObject.Update(MapHandler.Map.ActiveMap.MapObjectList);
             ConsoleHandler.Refresh(MapHandler.Map.ActiveMap);
             bool quit = false;
             while (!quit)
@@ -25,6 +26,7 @@ namespace ASCIIGame
                 ConsoleKeyInfo keyinput = Console.ReadKey(true);
                 bool cont = KeyInput(keyinput);
                 if (!cont) { quit = true; }
+                MapObject.Update(MapHandler.Map.ActiveMap.MapObjectList);
                 ConsoleHandler.Refresh(MapHandler.Map.ActiveMap);
             }
         }
